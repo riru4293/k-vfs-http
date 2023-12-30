@@ -127,7 +127,7 @@ public class Http5ProxyScheme extends AbstractFileOption {
      * Indicates that other object is equal to this one.
      *
      * @param other an any object
-     * @return {@code true} if equals ,otherwise {@code false}.
+     * @return {@code true} if equals, otherwise {@code false}.
      * @since 1.0.0
      */
     @Override
