@@ -147,22 +147,20 @@ class Http5CookiesTest {
 
         List<Cookie> results = List.of(extractValue(opts));
 
-        assertThat(results).size().isEqualTo(2);
-
-        assertThat(results).first()
-                .returns("n1", Cookie::getName)
-                .returns("v1", Cookie::getValue)
-                .returns("d1", Cookie::getDomain)
-                .returns("p1", Cookie::getPath)
-                .returns(true, Cookie::isHttpOnly)
-                .returns(true, Cookie::isSecure)
-                .returns(Instant.parse("2000-01-01T00:00:00Z"), Cookie::getCreationInstant)
-                .returns(Instant.parse("2999-12-31T23:59:59Z"), Cookie::getExpiryInstant)
-                .returns(null, c -> c.getAttribute("an1"))
-                .returns("av2", c -> c.getAttribute("an2"));
-
-        assertThat(results).last().returns("n2", Cookie::getName);
-
+        assertThat(results).hasSize(2)
+                .satisfies(r -> assertThat(r).first()
+                        .returns("n1", Cookie::getName)
+                        .returns("v1", Cookie::getValue)
+                        .returns("d1", Cookie::getDomain)
+                        .returns("p1", Cookie::getPath)
+                        .returns(true, Cookie::isHttpOnly)
+                        .returns(true, Cookie::isSecure)
+                        .returns(Instant.parse("2000-01-01T00:00:00Z"), Cookie::getCreationInstant)
+                        .returns(Instant.parse("2999-12-31T23:59:59Z"), Cookie::getExpiryInstant)
+                        .returns(null, c -> c.getAttribute("an1"))
+                        .returns("av2", c -> c.getAttribute("an2")))
+                .satisfies(r -> assertThat(r).last()
+                        .returns("n2", Cookie::getName));
     }
 
     /**
